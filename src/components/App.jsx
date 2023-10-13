@@ -1,10 +1,12 @@
 import { Component } from 'react';
-import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
 import { fetchImg } from 'api';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { ErrorMessage } from './ErrorMessage/ErrorMessage';
+import { MainApp } from './App.styled';
+import Notiflix from 'notiflix';
+import { Radio } from  'react-loader-spinner'
 
 export class App extends Component {
   state = {
@@ -13,6 +15,7 @@ export class App extends Component {
     images: [],
     loading: false,
     error: false,
+    perPage: 12,
   };
 
 
@@ -22,11 +25,21 @@ export class App extends Component {
       prevState.page !== this.state.page
     ) {
         this.setState({ loading: true, error: false });
-        fetchImg(this.state.page, this.state.query)
+        const {page, query, perPage} = this.state
+        fetchImg(page, query, this.perPage)
   
         .then((data) => {
-          const { hits } = data;
-          this.setState({images: hits})
+          const { hits, totalHits } = data;
+
+          this.setState(prevState => ({
+            images: [...prevState.images, ...hits],
+          }));
+
+          const totalPages = Math.ceil(totalHits / perPage);
+          if (page === totalPages) {
+            this.endOfSearch();
+            Button.setAttribute('disabled', '');
+          }
         })
                 
         .catch(() => {
@@ -59,16 +72,29 @@ export class App extends Component {
   };
 
 
+  endOfSearch() {
+    Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
+  }
+
+
   render() {
-    
+   
     return (
-      <div>
+      <MainApp>
         <Searchbar onSubmit={this.onSubmit}></Searchbar>
-        {this.state.loading && (<Loader/>)}
-        {this.state.error && (<ErrorMessage/>)}
-        {this.state.images.length > 0 && <ImageGallery data = {this.state.images}/>}
-        <Button onClick={this.onLoadMore}/>
-      </div>
+        {this.state.loading && (
+          <Radio
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="radio-loading"
+            wrapperStyle={{}}
+            wrapperClass="radio-wrapper"
+          />)}
+        {this.state.error && (<ErrorMessage title='Whoops! Error! Please reload this page!' />)}
+        {this.state.images.length > 0 && <ImageGallery data={this.state.images} />}
+        {this.state.images.length > 0 && <Button onClick={this.onLoadMore}/>}
+      </MainApp>
     )
   }
 }

@@ -2,12 +2,12 @@
 
 import axios from 'axios';
 
-export const fetchImg = async (currentPage, query) => {
+export const fetchImg = async (currentPage, query, perPage) => {
     axios.defaults.baseURL = 'https://pixabay.com/api/';
 
     const params = new URLSearchParams({
         page : currentPage,
-        per_page: 12,
+        per_page: perPage,
         key: "39093226-ac0b10f11dd0e76f215b060f9",
         q: query,
         image_type: "photo",

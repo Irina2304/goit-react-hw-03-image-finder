@@ -1,8 +1,8 @@
 
 
-export const ErrorMessage = () => {
+export const ErrorMessage = ({title}) => {
     return (
-        <p>Whoops! Error! Please reload this page!</p>
+        <p>{ title }</p>
     )
 
 }

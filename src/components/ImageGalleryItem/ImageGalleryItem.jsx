@@ -1,6 +1,7 @@
 
 import { Component } from 'react';
 import Modal from 'react-modal';
+import { ImgGalleryItem, ImageGalleryItemImg } from './ImageGalleryItem.styled';
 
 
 const customStyles = {
@@ -35,22 +36,20 @@ export class ImageGalleryItem extends Component {
 
     return (
       
-        <li className="galleryItem">
-            <div >
-                <img src={data} alt={tags} onClick={this.openModal}/>
-              
-                <Modal
-                    isOpen={isModalOpen}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Example Modal"
-                    >
-                    <div>
-                        <img src={dataModal} alt={tags} width={700}/>
-                    </div>
-                </Modal>
-            </div>
-        </li>
+        <ImgGalleryItem className="galleryItem">
+          <ImageGalleryItemImg src={data} alt={tags} onClick={this.openModal}/>
+        
+          <Modal
+              isOpen={isModalOpen}
+              onRequestClose={this.closeModal}
+              style={customStyles}
+              contentLabel="Example Modal"
+              >
+              <div>
+                  <img src={dataModal} alt={tags} width={700}/>
+              </div>
+          </Modal>
+        </ImgGalleryItem>
     );
   }
 }

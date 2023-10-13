@@ -1,14 +1,15 @@
-
+import { Search, SearchForm, SearchFormButton, SearchFormInput } from "./Searchbar.styled"
+import { FaSearch } from 'react-icons/fa';
 
 export const Searchbar = ({ onSubmit }) => {
     return (
-        <header className="searchbar">
-            <form onSubmit={onSubmit} className="form">
-                <button type="submit" className="button">
-                <span className="button-label">Search</span>
-                </button>
+        <Search className="searchbar">
+            <SearchForm onSubmit={onSubmit} className="form">
+                <SearchFormButton type="submit" className="button">
+                    <span className="button-label"> <FaSearch /></span>
+                </SearchFormButton>
 
-                <input
+                <SearchFormInput
                 className="input"
                 name="input"
                 type="text"
@@ -16,8 +17,8 @@ export const Searchbar = ({ onSubmit }) => {
                 autoFocus
                 placeholder="Search images and photos"
                 />
-            </form>
-        </header>
+            </SearchForm>
+        </Search>
 
     )
 }
