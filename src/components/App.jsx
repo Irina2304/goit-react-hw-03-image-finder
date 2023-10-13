@@ -20,11 +20,12 @@ export class App extends Component {
     if (
         prevState.query !== this.state.query ||
         prevState.page !== this.state.page
-        ){
+    ) {
+          this.setState({ loading: true, error: false });
           fetchImg(this.state.page, this.state.query)
-        
+  
           .then((data) => {
-            this.setState({ loading: true, error: false });
+            // this.setState({ loading: true, error: false });
             const { hits } = data;
             this.setState({images: hits})
           })
@@ -39,7 +40,6 @@ export class App extends Component {
         }
         
   }
-
 
   onSubmit = (evt) => {
     evt.preventDefault();
@@ -65,14 +65,9 @@ export class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={this.onSubmit}></Searchbar>
-        {this.state.loading && (
-          <Loader/>
-        )}
-        {this.state.error && (
-          <ErrorMessage/>
-        )}
+        {this.state.loading && (<Loader/>)}
+        {this.state.error && (<ErrorMessage/>)}
         {this.state.images.length > 0 && <ImageGallery data = {this.state.images}/>}
-        {this.state.loading && <Loader/>}
         <Button onClick={this.onLoadMore}/>
       </div>
     )
