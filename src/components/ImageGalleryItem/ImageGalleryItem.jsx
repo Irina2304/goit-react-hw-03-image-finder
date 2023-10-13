@@ -3,7 +3,9 @@
 export const ImageGalleryItem = ({data}) => {
     return (
         <li className="galleryItem">
-            <img src= {data.webformatURL} alt="cat" />
+            <div>
+                <img src= {data} alt="cat" />
+            </div>
         </li>
     )
 }

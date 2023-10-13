@@ -1,3 +1,6 @@
 export const Loader = () => {
-    return
+    return (
+        <p>data is loading...</p>
+    )
+
 }

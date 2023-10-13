@@ -1,12 +1,15 @@
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem"
 
-export const ImageGallery = ({data}) => {
+export const ImageGallery = ({ data }) => {
+    console.log(data);
     return (
         
-        <ul>
-            console.log(data);
+        <ul className="gallery">
             {data.map(item => (
-                <ImageGalleryItem key={item.data.id} data={data} />
+                <ImageGalleryItem
+                    key={item.id}
+                    data={item.webformatURL}
+                />
             ))}
         </ul>
     )
