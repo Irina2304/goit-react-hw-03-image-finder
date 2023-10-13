@@ -17,8 +17,8 @@ export class App extends Component {
   };
 
 
-  handleSubmit = evt => {
-     evt.preventDefault();
+  // handleSubmit = evt => {
+  //    evt.preventDefault();
 
   //   // Сохраняем термин поиска (query)
   //   // Сбрасываем page в 1
@@ -47,18 +47,11 @@ export class App extends Component {
   // }
 
   render() {
-    fetchImg(this.state.page)
-  
-      .then((data) => {
-        const { hits } = data;
-        // console.dir(hits);
-      })
     
-        
     return (
       <div>
         <Searchbar></Searchbar>
-        <ImageGallery data = {data}></ImageGallery>
+        {/* <ImageGallery data = {data}></ImageGallery> */}
         {/* <onSubmit={this.handleSubmit}>Search form</onSubmit=>
         {this.state.images.length > 0 && <div>GALLERY</div>}
         {this.state.loading && <div>Loader...</div>} */}
