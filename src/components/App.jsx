@@ -18,26 +18,25 @@ export class App extends Component {
 
   componentDidUpdate(_, prevState) {
     if (
-        prevState.query !== this.state.query ||
-        prevState.page !== this.state.page
+      prevState.query !== this.state.query ||
+      prevState.page !== this.state.page
     ) {
-          this.setState({ loading: true, error: false });
-          fetchImg(this.state.page, this.state.query)
+        this.setState({ loading: true, error: false });
+        fetchImg(this.state.page, this.state.query)
   
-          .then((data) => {
-            // this.setState({ loading: true, error: false });
-            const { hits } = data;
-            this.setState({images: hits})
-          })
+        .then((data) => {
+          const { hits } = data;
+          this.setState({images: hits})
+        })
                 
-          .catch(() => {
-            this.setState({ error: true });
-          })
+        .catch(() => {
+          this.setState({ error: true });
+        })
 
-          .finally(() => {
-            this.setState({ loading: false });
-          })
-        }
+        .finally(() => {
+          this.setState({ loading: false });
+        })
+      }
         
   }
 

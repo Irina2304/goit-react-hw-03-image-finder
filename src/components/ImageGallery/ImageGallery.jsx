@@ -1,7 +1,7 @@
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem"
 
 export const ImageGallery = ({ data }) => {
-    console.log(data);
+
     return (
         
         <ul className="gallery">
@@ -9,6 +9,8 @@ export const ImageGallery = ({ data }) => {
                 <ImageGalleryItem
                     key={item.id}
                     data={item.webformatURL}
+                    dataModal={item.largeImageURL}
+                    tags={item.tags}
                 />
             ))}
         </ul>
